@@ -5,17 +5,18 @@ import (
 	"fmt"
 	"path"
 
+	"merkleapi/config"
+	myhttp "merkleapi/http"
+	"merkleapi/provider"
+	"merkleapi/provider/file"
+	"merkleapi/provider/pg"
+	"merkleapi/state"
+	"merkleapi/types"
+	"merkleapi/updates"
+
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/ton-community/compressed-nft-api/config"
-	myhttp "github.com/ton-community/compressed-nft-api/http"
-	"github.com/ton-community/compressed-nft-api/provider"
-	"github.com/ton-community/compressed-nft-api/provider/file"
-	"github.com/ton-community/compressed-nft-api/provider/pg"
-	"github.com/ton-community/compressed-nft-api/state"
-	"github.com/ton-community/compressed-nft-api/types"
-	"github.com/ton-community/compressed-nft-api/updates"
 	"github.com/xssnick/tonutils-go/address"
 )
 

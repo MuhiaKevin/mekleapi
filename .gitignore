@@ -20,4 +20,6 @@
 # Go workspace file
 go.work
 merkleapi
+newowner.txt
 .env
+ctl
