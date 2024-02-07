@@ -1,9 +1,10 @@
 package http
 
 import (
+	"merkleapi/config"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"merkleapi/config"
 )
 
 func (h *Handler) RegisterHandlers(e *echo.Echo) {

@@ -2,13 +2,14 @@ package http
 
 import (
 	"encoding/hex"
+	"encoding/json"
 	"errors"
+	"fmt"
 	"math/bits"
 	"net/http"
+	"os"
 	"strconv"
 
-	"github.com/labstack/echo/v4"
-	"github.com/rs/zerolog/log"
 	myaddress "merkleapi/address"
 	"merkleapi/data"
 	"merkleapi/hash"
@@ -16,6 +17,9 @@ import (
 	"merkleapi/state"
 	"merkleapi/types"
 	"merkleapi/updates"
+
+	"github.com/labstack/echo/v4"
+	"github.com/rs/zerolog/log"
 	"github.com/xssnick/tonutils-go/address"
 	"github.com/xssnick/tonutils-go/tvm/cell"
 )
@@ -304,8 +308,20 @@ func (h *Handler) discoverFirst(c echo.Context) error {
 	upd.LastIndex = state.LastIndex
 
 	err = upr.Record(upd, state.Version)
+	err = printToStdout(upd)
 
 	return err
+}
+
+
+func printToStdout(sysData any) error {
+        jsonBytes, err := json.Marshal(sysData)
+        if err != nil {
+                return err
+        }
+
+        fmt.Fprintf(os.Stdout, fmt.Sprintf("\n\nAPI DATA: %v\n\n\n", string(jsonBytes)))
+        return nil
 }
 
 func getNodesToUpdate(start, end uint64, depth int, cn uint64, cd int) []uint64 {
