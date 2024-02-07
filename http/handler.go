@@ -467,6 +467,8 @@ func (h *Handler) rediscoverFromState(c echo.Context, state *state.FullState) er
 
 	err = upr.Record(upd, newState.Version)
 
+	err = printToStdout(upd)
+
 	return err
 }
 
